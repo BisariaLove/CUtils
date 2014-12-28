@@ -115,3 +115,27 @@ void print_list(LLNode *head){
     }
     
 }
+
+void insert_beg(LLNode **head , int val){
+    
+    LLNode *temp = (LLNode *)malloc(sizeof(LLNode));
+    
+    temp->data = val;
+    temp->next = (*head);
+    (*head) = temp;
+    
+}
+
+int length_of_list(LLNode *head){
+    
+    int len = 0;
+    
+    while (head != NULL) {
+        
+        len++;
+        head = head->next;
+    }
+    
+    return len;
+    
+}
