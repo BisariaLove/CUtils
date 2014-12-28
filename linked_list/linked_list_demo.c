@@ -8,6 +8,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#define TRUE  1
+#define FALSE 0
 
 typedef struct node{
     
@@ -21,19 +23,36 @@ void print_list(LLNode *head);
 int length_of_list(LLNode *head);
 void insert_beg(LLNode **head , int val);
 LLNode* reverse_list(LLNode *head);
+int compare_ll(LLNode *head1 , LLNode *head2);
 
 LLNode* reverse_list(LLNode *head);
 
 int main(){
     
-    LLNode* head1 = NULL ;
+    LLNode *head1 = NULL , *head2 = NULL ;
     
     head1 = create_List();
     print_list(head1);
     
-    printf("Reversing the list..\n");
+    head2 = create_List();
+    print_list(head1);
+    
+    /*printf("Reversing the list..\n");
     head1 = reverse_list(head1);
     print_list(head1);
+    */
+    
+    printf("Comparing the  two lists..\n");
+    int retval = compare_ll(head1 , head2);
+    
+    if(retval == TRUE){
+        
+        printf("Linked List are equal..\n");
+        
+    }else{
+        
+        printf("Linked List unequal..\n");
+    }
     
     return 0;
     
@@ -177,4 +196,28 @@ LLNode* reverse_list(LLNode *head){
     }
     
     return r;
+}
+
+int compare_ll(LLNode *head1 , LLNode *head2){
+    
+    int size1 = -1 , size2 = -1;
+    
+    size1 = length_of_list(head1);
+    size2 = length_of_list(head2);
+    
+    if(size1 != size2)
+        return FALSE;
+
+    while ((head1 != NULL) && (head2 != NULL)) {
+        
+        if(head1->data != head2->data){
+            
+            return FALSE;
+            
+        }
+        head1 = head1->next;
+        head2 = head2->next;
+    }
+    
+    return TRUE;
 }
