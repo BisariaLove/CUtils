@@ -18,6 +18,11 @@ typedef struct node{
 
 LLNode* create_List();
 void print_list(LLNode *head);
+int length_of_list(LLNode *head);
+void insert_beg(LLNode **head , int val);
+LLNode* reverse_list(LLNode *head);
+
+LLNode* reverse_list(LLNode *head);
 
 int main(){
     
@@ -26,6 +31,11 @@ int main(){
     head1 = create_List();
     print_list(head1);
     
+    printf("Reversing the list..\n");
+    head1 = reverse_list(head1);
+    print_list(head1);
+    
+    return 0;
     
 }
 
@@ -138,4 +148,33 @@ int length_of_list(LLNode *head){
     
     return len;
     
+}
+
+LLNode* reverse_list(LLNode *head){
+    
+    LLNode *p = NULL ,*q = NULL , *r = NULL;
+    p = head ;
+    q = p->next;
+    
+    while ((p != NULL)) {
+        
+        if (r == NULL) {
+            
+            r = p;
+            r->next = NULL;
+            
+        }else{
+            
+            p->next = r;
+            r = p;
+        }
+        
+        p = q;
+        if(q != NULL)
+            q = q->next;
+        
+        
+    }
+    
+    return r;
 }
