@@ -149,3 +149,14 @@ int is_palindrome_reverse(LLNode *head , int length , LLNode **nextNode){
     }
 }
 
+/*Iterative method to check if list is palindrome (using fast and slow pointer approach)*/
+
+int check_palindrome(LLNode *head){
+    
+    LLNode *fast = NULL;
+    LLNode *slow = NULL;
+    
+    
+    
+}
+
