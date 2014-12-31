@@ -12,8 +12,8 @@
 #include <stdio.h>
 #include <math.h>
 #define MAXSIZE    100
-#define LEFT(X)    (2*(X))
-#define RIGHT(X)   ((2*(X)) + 1)
+#define LEFT(X)    (2*(X) +1)
+#define RIGHT(X)   ((2*(X)) + 2)
 #define Parent(X)  ((X)/2)
 
 void inputElements(int *arr ,int *size);

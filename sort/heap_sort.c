@@ -8,9 +8,6 @@
 
 #include "../include/heap_sort.h"
 
-/*max_heapify();
-build_max_heap();
-heap_sort();*/
 
 int main(){
     
@@ -54,7 +51,7 @@ void printElements(int *arr , int size){
 
 void build_max_heap(int *arr,int heap_size){
     
-    for(int i=((heap_size - 1)/2) ; i>0 ; i--){
+    for(int i=((heap_size)/2) ; i>=0 ; i--){
         
         max_heapify(arr , i , heap_size);
     }
@@ -94,12 +91,13 @@ void heap_sort(int *arr , int heap_size){
     int temp = -1 , i ;
     build_max_heap(arr,heap_size);
     
-    for (i = (heap_size-1); i > 1; i--) {
+    for (i = (heap_size-1); i >= 1; i--) {
         
         temp = arr[i];
         arr[i] = arr[0];
         arr[0] = temp;
-        max_heapify(arr , i , heap_size);
+        heap_size = heap_size-1;
+        max_heapify(arr , 0 , heap_size);
     }
     
 }
