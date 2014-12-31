@@ -9,9 +9,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-LLNode* create_List();
-void print_list(LLNode *head);
-
 typedef struct node{
     int data;
     struct node* next;
@@ -20,9 +17,14 @@ typedef struct node{
 typedef struct list_of_list{
     
     struct node *head_of_list;
-    struct stack_list *next_stack;
+    struct list_of_list *next_stack;
     
 }LOLNode;
+
+LLNode* create_List();
+void print_list(LLNode *head);
+int insert_lol_node(LOLNode **head , LLNode *head1);
+void print_lol_nodes(LOLNode *head);
 
 
 int main(){
@@ -38,7 +40,9 @@ int main(){
     
     insert_lol_node(&head , head1);
     
+    printf("Printing the Top of lists..\n");
     
+    print_lol_nodes(head);
     
     
     return 0;
@@ -104,10 +108,10 @@ int insert_lol_node(LOLNode **head , LLNode *head1){
     if(temp == NULL)
         return -1;
     
-    LOLNode *last = NULL
+    LOLNode *last = NULL;
     
     temp->head_of_list = head1;
-    temp->next = NULL;
+    temp->next_stack = NULL;
     
     if(NULL == (*head)){
         
@@ -117,11 +121,11 @@ int insert_lol_node(LOLNode **head , LLNode *head1){
         
         last = (*head);
         
-        while (last->next != NULL) {
-            last = last->next;
+        while (last->next_stack != NULL) {
+            last = last->next_stack;
         }
         
-        last->next = temp;
+        last->next_stack = temp;
         last = temp;
     }
     
@@ -131,8 +135,9 @@ int insert_lol_node(LOLNode **head , LLNode *head1){
 void print_lol_nodes(LOLNode *head){
     
     int i =0;
-    while (head->next_stack != NULL) {
-        printf("List %d head->data: %d" , head->head_of_list->data);
+    while (head != NULL) {
+        printf("List %d head->data: %d\n" , i,head->head_of_list->data);
+        head = head->next_stack;
         
     }
     
