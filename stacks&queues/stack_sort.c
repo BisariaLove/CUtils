@@ -48,14 +48,19 @@ int main(){
 int push_ll(LLNode **head , int val){
     
     LLNode *temp = (LLNode*)malloc(sizeof(LLNode));
+    temp->data = val;
+    temp->next = NULL;
     
     if (NULL == temp) {
         return -1;
     }
-    temp->data = val;
-    temp->next = *head;
-    *head = temp;
     
+    if(NULL == *head)
+        *head = temp;
+    else{
+        temp->next = *head;
+        *head = temp;
+    }
     return 1;
     
 }
@@ -108,15 +113,15 @@ LLNode* stack_sort(LLNode *head){
         retval = pop_ll(&temp);
         
         if(new_head != NULL){
-            while((new_head->data > retval) && new_head != NULL){
-                result = push_ll(&head , pop_ll(&new_head));
+            
+            while((peek_ll(new_head) > retval) && (new_head != NULL)){
                 
+                result = push_ll(&temp , pop_ll(&new_head));
                 if (result == -1) {
                     perror("push operation unsucessful\n");
+                
                 }
-                new_head = new_head->next;
             }
-            
         }
         
         result = push_ll(&new_head , retval);
@@ -124,7 +129,10 @@ LLNode* stack_sort(LLNode *head){
             perror("push operation unsucessful\n");
         }
         
-        temp = temp->next;
+        printf("Printing original Stack..\n");
+        print_ll(temp);
+        printf("Printing the new Stack..\n");
+        print_ll(new_head);
     }
     
     
