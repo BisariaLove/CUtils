@@ -103,17 +103,30 @@ LLNode* stack_sort(LLNode *head){
     int retval , result;
     temp = head;
     
-    retval = pop_ll(&head);
-    
-    while((temp != NULL) && (new_head->data > retval)){
+    while((temp != NULL)){
         
-        result = push_ll(&head , pop_ll(&new_head));
+        retval = pop_ll(&temp);
         
+        if(new_head != NULL){
+            while((new_head->data > retval) && new_head != NULL){
+                result = push_ll(&head , pop_ll(&new_head));
+                
+                if (result == -1) {
+                    perror("push operation unsucessful\n");
+                }
+                new_head = new_head->next;
+            }
+            
+        }
+        
+        result = push_ll(&new_head , retval);
         if (result == -1) {
             perror("push operation unsucessful\n");
         }
+        
+        temp = temp->next;
     }
     
-    result = push_ll(&new_head , retval);
+    
     return new_head;
 }
