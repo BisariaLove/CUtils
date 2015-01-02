@@ -7,11 +7,19 @@
 //
 
 #include <stdio.h>
+#include <stdlib.h>
+
+typedef struct llnode{
+    
+    int data;
+    struct llnode *next;
+}LLNode;
 
 int push_ll(LLNode **head , int val);
 int pop_ll(LLNode **head);
 void print_ll(LLNode *head);
 int peek_ll(LLNode *head);
+LLNode* stack_sort(LLNode *head);
 
 int main(){
     
@@ -99,7 +107,7 @@ LLNode* stack_sort(LLNode *head){
     
     while((temp != NULL) && (new_head->data > retval)){
         
-        result = push_ll(&head , pop_ll(new_head));
+        result = push_ll(&head , pop_ll(&new_head));
         
         if (result == -1) {
             perror("push operation unsucessful\n");
@@ -107,4 +115,5 @@ LLNode* stack_sort(LLNode *head){
     }
     
     result = push_ll(&new_head , retval);
+    return new_head;
 }
