@@ -32,6 +32,7 @@ void print_preorder(TreeNode *root);
 void print_postorder(TreeNode *root);
 TreeNode* find_min(TreeNode *root);
 TreeNode* find_max(TreeNode *root);
+TreeNode* delete_node(TreeNode* root , int data);
 
 int main(){
     
@@ -75,6 +76,7 @@ int main(){
         printf("Tree Empty..!!\n");
     else
         printf("Max of the Tree: %d\n",retval->data);
+    
     
     return 0;
 }
@@ -129,6 +131,44 @@ TreeNode* insert_node(TreeNode *node , int val){
     return node;
     
     
+}
+
+TreeNode* delete_node(TreeNode* root , int data){
+    
+    TreeNode *temp = NULL;
+    
+    if(NULL == root){
+        printf("Element not found..\n");
+    }
+    
+    else if(data < root->data){
+        root->left = delete_node(root->left , data);
+    }
+    else if(data > root->data){
+        root->right = delete_node(root->right , data);
+    }
+    else{
+        
+        /*Case where node to be deleted has two children*/
+        if(root->left && root->left){
+            
+            temp = find_min(root->right);
+            root->data = temp->data;
+            root->right = delete_node(root->right , temp->data);
+        }
+        
+        /*Case where node to be deleted has one or zero children*/
+        else{
+            temp = root;
+            if(NULL == root->left)
+                root = root->left;
+            else if(NULL == root->right)
+                root = root->left;
+            free(temp);
+            
+        }
+    }
+    return root;
 }
 
 TreeNode* find_node(TreeNode *root , int data){
