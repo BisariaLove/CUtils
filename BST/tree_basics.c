@@ -30,6 +30,8 @@ TreeNode* insert_node(TreeNode *node , int val);
 void print_inorder(TreeNode *root);
 void print_preorder(TreeNode *root);
 void print_postorder(TreeNode *root);
+TreeNode* find_min(TreeNode *root);
+TreeNode* find_max(TreeNode *root);
 
 int main(){
     
@@ -56,11 +58,48 @@ int main(){
     retval = find_node(root , 10);
     
     if(NULL == retval)
-        printf("Element not found");
+        printf("Element not found..!!\n");
     else
-        printf("%d",retval->data);
+        printf("elemnet Found: %d\n",retval->data);
+    
+    retval = find_min(root);
+    
+    if(NULL == retval)
+        printf("Tree Empty..!!\n");
+    else
+        printf("Min of the Tree: %d\n",retval->data);
+    
+    retval = find_max(root);
+    
+    if(NULL == retval)
+        printf("Tree Empty..!!\n");
+    else
+        printf("Max of the Tree: %d\n",retval->data);
     
     return 0;
+}
+
+TreeNode* find_min(TreeNode *root){
+    
+    if(NULL == root){
+        return NULL;
+    }
+    if(root->left)
+        return find_min(root->left);
+    else
+        return root;
+}
+
+TreeNode* find_max(TreeNode *root){
+    
+    if(NULL == root){
+        return NULL;
+    }
+    if(root->right)
+        return find_max(root->right);
+    else
+        return root;
+    
 }
 
 TreeNode* insert_node(TreeNode *node , int val){
