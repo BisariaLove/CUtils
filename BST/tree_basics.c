@@ -9,28 +9,29 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+typedef struct tree_node{
+    
+    struct tree_node *parent;
+    int data;
+    struct tree_node *left;
+    struct tree_node *right;
+    
+}TreeNode;
+
 typedef struct BST{
     
-    struct tree_node root;
+    struct tree_node *root;
     int size;
     
 }BST;
 
-typedef struct tree_node{
-    
-    struct tree_node parent;
-    int data;
-    struct tree_node left;
-    struct tree_node right;
-    
-}TreeNode;
-
 TreeNode* find_node(TreeNode *root , int data);
 TreeNode* insert_node(TreeNode *node , int val);
+void print_inorder(TreeNode *root);
 
 int main(){
     
-    TreeNode *root = NULL;
+    TreeNode *root = NULL , *retval = NULL;
     
     root = insert_node(root, 5);
     root = insert_node(root, -1);
@@ -41,14 +42,22 @@ int main(){
     root = insert_node(root, 9);
     root = insert_node(root, 6);
     
+    printf("Printing the Tree..!!\n");
+    print_inorder(root);
     
+    retval = find_node(root , 10);
+    
+    if(NULL == retval)
+        printf("Element not found");
+    else
+        printf("%d",retval->data);
     
     return 0;
 }
 
 TreeNode* insert_node(TreeNode *node , int val){
     
-    TreeNode *temp = NULL , *current = NULL;
+    TreeNode *temp = NULL ;
     
     if(NULL == node){
         temp = (TreeNode*) malloc(sizeof(TreeNode));
@@ -63,10 +72,10 @@ TreeNode* insert_node(TreeNode *node , int val){
         return temp;
     }
     
-    if(data > (node->data)){
+    if(val > (node->data)){
         node->right = insert_node(node->right , val);
     }
-    else if(data < (node->data)){
+    else if(val < (node->data)){
         node->left = insert_node(node->left , val);
     }
     
@@ -85,7 +94,7 @@ TreeNode* find_node(TreeNode *root , int data){
         return find_node(root->right , data);
     }
     
-    if(data < node->data){
+    if(data < root->data){
         return find_node(root->left , data);
     }
     
@@ -94,6 +103,14 @@ TreeNode* find_node(TreeNode *root , int data){
     }
 }
 
-void print_inorder(){
+void print_inorder(TreeNode *root){
     
+    if(NULL == root){
+        return;
+    }
+    else{
+        print_inorder(root->left);
+        printf("%d\n",root->data);
+        print_inorder(root->right);
+    }
 }
