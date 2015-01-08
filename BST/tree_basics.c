@@ -28,6 +28,8 @@ typedef struct BST{
 TreeNode* find_node(TreeNode *root , int data);
 TreeNode* insert_node(TreeNode *node , int val);
 void print_inorder(TreeNode *root);
+void print_preorder(TreeNode *root);
+void print_postorder(TreeNode *root);
 
 int main(){
     
@@ -42,8 +44,14 @@ int main(){
     root = insert_node(root, 9);
     root = insert_node(root, 6);
     
-    printf("Printing the Tree..!!\n");
+    printf("Printing the Tree Inorder..!!\n");
     print_inorder(root);
+    
+    printf("Printing the Tree Preorder..!!\n");
+    print_preorder(root);
+    
+    printf("Printing the Tree Postorder..!!\n");
+    print_postorder(root);
     
     retval = find_node(root , 10);
     
@@ -112,5 +120,30 @@ void print_inorder(TreeNode *root){
         print_inorder(root->left);
         printf("%d\n",root->data);
         print_inorder(root->right);
+    }
+}
+
+void print_preorder(TreeNode *root){
+ 
+    if(NULL == root){
+        return;
+    }
+    
+    else{
+        printf("%d\n" , root->data);
+        print_preorder(root->left);
+        print_preorder(root->right);
+    }
+}
+
+void print_postorder(TreeNode *root){
+    
+    if(NULL == root){
+        return;
+    }
+    else{
+        print_postorder(root->left);
+        print_postorder(root->right);
+        printf("%d\n",root->data);
     }
 }
