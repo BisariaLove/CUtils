@@ -77,6 +77,11 @@ int main(){
     else
         printf("Max of the Tree: %d\n",retval->data);
     
+    printf("Deletng the Max Node..!!\n");
+    retval = delete_node(root , 10);
+    
+    printf("Printing the Tree Inorder..!!\n");
+    print_inorder(root);
     
     return 0;
 }
@@ -161,7 +166,7 @@ TreeNode* delete_node(TreeNode* root , int data){
         else{
             temp = root;
             if(NULL == root->left)
-                root = root->left;
+                root = root->right;
             else if(NULL == root->right)
                 root = root->left;
             free(temp);
