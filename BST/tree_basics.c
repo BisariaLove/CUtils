@@ -10,8 +10,6 @@
 #include <stdlib.h>
 
 typedef struct tree_node{
-    
-    struct tree_node *parent;
     int data;
     struct tree_node *left;
     struct tree_node *right;
