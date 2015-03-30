@@ -155,7 +155,7 @@ TreeNode* delete_node(TreeNode* root , int data){
     else{
         
         /*Case where node to be deleted has two children*/
-        if(root->left && root->left){
+        if(root->left && root->right){
             
             temp = find_min(root->right);
             root->data = temp->data;
