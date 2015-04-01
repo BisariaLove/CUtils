@@ -10,20 +10,11 @@
 #include <stdlib.h>
 
 typedef struct tree_node{
-    
-    struct tree_node *parent;
     int data;
     struct tree_node *left;
     struct tree_node *right;
     
 }TreeNode;
-
-typedef struct BST{
-    
-    struct tree_node *root;
-    int size;
-    
-}BST;
 
 TreeNode* find_node(TreeNode *root , int data);
 TreeNode* insert_node(TreeNode *node , int val);
